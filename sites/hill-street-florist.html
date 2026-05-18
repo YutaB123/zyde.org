@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hill Street Florist — Flowers that mean something</title>
+<meta name="description" content="Hill Street Florist: small studio arrangements, weekly subscriptions, and one-off bouquets for the moments that matter." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,300;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --mauve: #c98a8a;
+    --mauve-deep: #8d4f4f;
+    --rose: #f4dde0;
+    --cream: #faf5f1;
+    --sage: #a5b39d;
+    --sage-deep: #5e6e58;
+    --ink: #2d2227;
+    --muted: #84757a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.65; }
+  .container { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; letter-spacing: -0.01em; line-height: 1.05; }
+  em { font-style: italic; }
+
+  /* Floating nav over hero */
+  .nav {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 20;
+    padding: 28px 0;
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500; font-size: 24px; color: #fff; letter-spacing: 0.01em; }
+  .nav-links { display: flex; gap: 28px; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; color: #fff; }
+  .nav-links a:hover { color: var(--rose); }
+  .nav-cta { padding: 11px 22px; border: 1px solid rgba(255,255,255,0.5); border-radius: 999px; color: #fff; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; }
+  .nav-cta:hover { background: #fff; color: var(--mauve-deep); border-color: #fff; }
+
+  /* FULL-BLEED HERO */
+  .hero {
+    position: relative;
+    height: 100vh; min-height: 620px;
+    background: url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1800&q=80&auto=format&fit=crop') center/cover #c98a8a;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(45,34,39,0.4) 0%, transparent 30%, transparent 60%, rgba(45,34,39,0.55) 100%);
+  }
+  .hero-inner { position: relative; z-index: 2; padding: 0 30px; max-width: 800px; }
+  .hero .stamp {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 30px;
+    padding: 8px 0;
+    border-top: 1px solid rgba(255,255,255,0.5);
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-size: clamp(54px, 8vw, 108px);
+    line-height: 1.0;
+    font-weight: 300;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 em { font-weight: 400; }
+  .hero-tag {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: clamp(18px, 1.8vw, 22px);
+    max-width: 480px; margin: 0 auto 40px;
+    opacity: 0.95;
+  }
+  .btn-light {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 32px;
+    background: rgba(255,255,255,0.95); color: var(--ink);
+    border-radius: 999px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+    transition: background .2s, transform .15s;
+  }
+  .btn-light:hover { background: #fff; transform: translateY(-2px); }
+  .hero-scroll {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); z-index: 2;
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.85);
+    writing-mode: vertical-rl;
+  }
+  .hero-scroll::before { content: ""; display: block; width: 1px; height: 28px; background: rgba(255,255,255,0.7); margin: 0 auto 14px; }
+
+  /* ARRANGEMENTS — staggered offset grid */
+  .arrangements { padding: 110px 0 80px; }
+  .section-eyebrow { font-family: 'Inter', sans-serif; text-align: center; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--mauve-deep); margin-bottom: 16px; font-weight: 600; }
+  .section-title { text-align: center; font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 5.5vw, 64px); line-height: 1.05; margin-bottom: 14px; font-weight: 400; }
+  .section-title em { color: var(--mauve-deep); }
+  .section-sub { text-align: center; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; color: var(--muted); margin-bottom: 70px; }
+  .arrange-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .arrange-card { display: flex; flex-direction: column; }
+  .arrange-card:nth-child(2) { transform: translateY(50px); }
+  .arrange-img { aspect-ratio: 3/4; margin-bottom: 18px; transition: transform .35s; }
+  .arrange-card:hover .arrange-img { transform: scale(1.02); }
+  .arr-1 { background: url('https://images.unsplash.com/photo-1487070183336-b863922373d4?w=700&q=80&auto=format&fit=crop') center/cover #c98a8a; }
+  .arr-2 { background: url('https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=700&q=80&auto=format&fit=crop') center/cover #a5b39d; }
+  .arr-3 { background: url('https://images.unsplash.com/photo-1469037784699-75dcf276d237?w=700&q=80&auto=format&fit=crop') center/cover #f4dde0; }
+  .arrange-card .name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; line-height: 1.2; margin-bottom: 4px; }
+  .arrange-card .name em { color: var(--mauve-deep); }
+  .arrange-card .desc { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px; color: var(--muted); margin-bottom: 10px; }
+  .arrange-card .price { font-size: 14px; letter-spacing: 0.04em; color: var(--ink); font-weight: 500; }
+
+  /* SUBSCRIBE — split panel */
+  .subscribe { padding: 110px 0; background: var(--rose); margin-top: 100px; }
+  .sub-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
+  .sub-img {
+    aspect-ratio: 1/1;
+    background: url('https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=900&q=80&auto=format&fit=crop') center/cover #c98a8a;
+    border-radius: 999px;
+  }
+  .sub-text h2 { font-size: clamp(36px, 4.5vw, 54px); line-height: 1.05; margin-bottom: 20px; }
+  .sub-text h2 em { color: var(--mauve-deep); }
+  .sub-text p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; color: var(--ink); margin-bottom: 16px; }
+  .sub-list { font-family: 'Inter', sans-serif; font-size: 15px; list-style: none; margin: 24px 0 32px; }
+  .sub-list li { padding: 10px 0; border-bottom: 1px solid rgba(45, 34, 39, 0.12); display: flex; justify-content: space-between; }
+  .sub-list li .label { color: var(--muted); }
+  .sub-list li .val { font-weight: 600; }
+  .btn-dark {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 32px;
+    background: var(--ink); color: var(--cream);
+    border-radius: 999px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+    transition: background .2s, transform .15s;
+  }
+  .btn-dark:hover { background: var(--mauve-deep); transform: translateY(-2px); }
+
+  /* VISIT */
+  .visit { padding: 110px 0; text-align: center; }
+  .visit h2 { font-size: clamp(36px, 4.5vw, 54px); margin-bottom: 50px; font-weight: 400; }
+  .visit h2 em { color: var(--mauve-deep); font-style: italic; }
+  .visit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 800px; margin: 0 auto; }
+  .visit-cell .lbl { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--mauve-deep); margin-bottom: 10px; font-weight: 600; }
+  .visit-cell .val { font-family: 'Cormorant Garamond', serif; font-size: 19px; line-height: 1.5; }
+
+  .footer { padding: 32px 0; border-top: 1px solid rgba(45,34,39,0.1); text-align: center; font-size: 13px; color: var(--muted); }
+  .footer a { color: var(--mauve-deep); font-style: italic; }
+
+  @media (max-width: 800px) {
+    .nav-links { display: none; }
+    .arrange-grid { grid-template-columns: 1fr; gap: 28px; }
+    .arrange-card:nth-child(2) { transform: none; }
+    .sub-grid, .visit-grid { grid-template-columns: 1fr; gap: 28px; }
+    .hero-scroll { display: none; }
+  }
+</style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="logo">Hill Street</div>
+      <nav class="nav-links">
+        <a href="#shop">Shop</a>
+        <a href="#subscribe">Subscribe</a>
+        <a href="#visit">Visit</a>
+      </nav>
+      <a href="#" onclick="event.preventDefault(); openModal('orderModal');" class="nav-cta">Order</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="stamp">— Hill Street · Floral Studio —</div>
+      <h1>Flowers, made to <em>mean something.</em></h1>
+      <p class="hero-tag">A small floral studio. Seasonal arrangements, weekly subscriptions, and bouquets for the moments that matter.</p>
+      <a href="#" onclick="event.preventDefault(); openModal('orderModal');" class="btn-light">Order today →</a>
+    </div>
+    <div class="hero-scroll">Scroll</div>
+  </section>
+
+  <section class="arrangements" id="shop">
+    <div class="container">
+      <div class="section-eyebrow">— Today's arrangements</div>
+      <h2 class="section-title">Cut this <em>morning.</em></h2>
+      <p class="section-sub">Available for delivery in-city or pickup at the studio.</p>
+      <div class="arrange-grid">
+        <article class="arrange-card" onclick="openArr('The Mary — $68')" style="cursor: pointer;">
+          <div class="arrange-img arr-1"></div>
+          <div class="name">The <em>Mary</em></div>
+          <div class="desc">Garden roses, eucalyptus, ranunculus.</div>
+          <div class="price">From $68</div>
+        </article>
+        <article class="arrange-card" onclick="openArr('The Frances — $84')" style="cursor: pointer;">
+          <div class="arrange-img arr-2"></div>
+          <div class="name">The <em>Frances</em></div>
+          <div class="desc">Wild sweet peas, hellebore, soft greens.</div>
+          <div class="price">From $84</div>
+        </article>
+        <article class="arrange-card" onclick="openArr('The Lila — $112')" style="cursor: pointer;">
+          <div class="arrange-img arr-3"></div>
+          <div class="name">The <em>Lila</em></div>
+          <div class="desc">Peonies, lisianthus, lily of the valley.</div>
+          <div class="price">From $112</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="subscribe" id="subscribe">
+    <div class="container sub-grid">
+      <div class="sub-img" aria-hidden="true"></div>
+      <div class="sub-text">
+        <div class="section-eyebrow" style="text-align: left; margin-bottom: 12px;">— Subscription</div>
+        <h2>Fresh flowers on your table, <em>every week.</em></h2>
+        <p>A small arrangement each Friday, cut that morning, dropped at your door. Cancel or skip a week any time.</p>
+        <ul class="sub-list">
+          <li><span class="label">Petite (weekly)</span><span class="val">$58</span></li>
+          <li><span class="label">Studio (every other week)</span><span class="val">$84</span></li>
+          <li><span class="label">Grand (weekly)</span><span class="val">$124</span></li>
+        </ul>
+        <a href="#" onclick="event.preventDefault(); openModal('subModal');" class="btn-dark">Start a subscription →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="visit" id="visit">
+    <div class="container">
+      <h2>Come <em>say hi.</em></h2>
+      <div class="visit-grid">
+        <div class="visit-cell">
+          <div class="lbl">Studio</div>
+          <div class="val">88 Hill Street<br/>Inside the courtyard</div>
+        </div>
+        <div class="visit-cell">
+          <div class="lbl">Hours</div>
+          <div class="val">Wed – Sat<br/>11am – 6pm</div>
+        </div>
+        <div class="visit-cell">
+          <div class="lbl">Contact</div>
+          <div class="val">(555) 088-1101<br/>hi@hillstreetflorist.com</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 Hill Street Florist — <em>Site built by <a href="../index.html">ZYDE</a></em>
+    </div>
+  </footer>
+
+  <style>
+    .modal { position: fixed; inset: 0; z-index: 1000; display: none; }
+    .modal.open { display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .modal-backdrop { position: absolute; inset: 0; background: rgba(45, 34, 39, 0.55); backdrop-filter: blur(8px); }
+    .modal-card { position: relative; background: var(--cream); color: var(--ink); max-width: 460px; width: 100%; padding: 44px 38px; border-radius: 4px; max-height: 92vh; overflow-y: auto; box-shadow: 0 40px 100px -20px rgba(45, 34, 39, 0.4); }
+    .modal-x { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; background: var(--rose); border: 0; border-radius: 50%; font-size: 22px; cursor: pointer; color: var(--mauve-deep); display: flex; align-items: center; justify-content: center; }
+    .modal-x:hover { background: var(--mauve-deep); color: var(--cream); }
+    .modal-eyebrow { font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 600; margin-bottom: 14px; color: var(--mauve-deep); }
+    .modal-title { font-family: 'Cormorant Garamond', serif; font-size: 38px; line-height: 1.0; margin-bottom: 10px; color: var(--ink); font-weight: 400; }
+    .modal-title em { font-style: italic; color: var(--mauve-deep); }
+    .modal-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--muted); margin-bottom: 26px; line-height: 1.5; }
+    .modal-card form { display: flex; flex-direction: column; gap: 12px; }
+    .modal-card form label { display: flex; flex-direction: column; gap: 6px; font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    .modal-card form input, .modal-card form select, .modal-card form textarea { padding: 13px 14px; border: 1px solid rgba(45, 34, 39, 0.18); font-family: inherit; font-size: 15px; border-radius: 2px; background: #fff; color: var(--ink); font-weight: 400; letter-spacing: 0; text-transform: none; resize: vertical; }
+    .modal-card form input:focus, .modal-card form select:focus, .modal-card form textarea:focus { outline: none; border-color: var(--mauve-deep); }
+    .modal-submit { margin-top: 8px; padding: 16px 28px; background: var(--ink); color: var(--cream); border: 0; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; font-family: inherit; }
+    .modal-submit:hover { background: var(--mauve-deep); }
+    .modal-success { text-align: center; padding: 16px 0; }
+    .modal-success .check { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: var(--mauve-deep); color: var(--cream); font-size: 32px; margin-bottom: 22px; }
+    .modal-success p { color: var(--muted); margin-top: 10px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; line-height: 1.55; }
+    .modal-done-btn { margin-top: 24px; padding: 12px 26px; background: transparent; border: 1px solid var(--ink); border-radius: 999px; cursor: pointer; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; color: var(--ink); font-family: inherit; }
+    .modal-done-btn:hover { background: var(--ink); color: var(--cream); }
+  </style>
+
+  <div class="modal" id="orderModal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <button class="modal-x" onclick="closeModal('orderModal')">×</button>
+      <div class="modal-body">
+        <div class="modal-eyebrow">— Order arrangement</div>
+        <h3 class="modal-title">Send <em>flowers.</em></h3>
+        <p class="modal-sub">Same-day delivery if you order before noon. Otherwise next morning.</p>
+        <form data-success="<h3 class='modal-title'>Order placed, <em>{name}!</em></h3><p>One {arrangement} will be cut this morning. Confirmation sent to {email}.</p>">
+          <label>Your name<input name="name" type="text" required></label>
+          <label>Email<input name="email" type="email" required></label>
+          <label>Pick an arrangement<select name="arrangement" required>
+            <option>The Mary — $68</option>
+            <option>The Frances — $84</option>
+            <option>The Lila — $112</option>
+            <option>Florist's choice — $95</option>
+          </select></label>
+          <label>Delivery or pickup<select name="delivery">
+            <option>Deliver in-city</option>
+            <option>I'll pick up from the studio</option>
+          </select></label>
+          <label>Note to include (optional)<textarea name="note" rows="2" placeholder="Happy birthday, thinking of you, etc."></textarea></label>
+          <button type="submit" class="modal-submit">Place order →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="subModal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <button class="modal-x" onclick="closeModal('subModal')">×</button>
+      <div class="modal-body">
+        <div class="modal-eyebrow">— Subscription</div>
+        <h3 class="modal-title">Flowers, <em>every week.</em></h3>
+        <p class="modal-sub">First delivery this Friday. Cancel or skip a week anytime.</p>
+        <form data-success="<h3 class='modal-title'>Welcome, <em>{name}!</em></h3><p>Your {plan} starts this Friday at {address}. We'll email a reminder Thursday.</p>">
+          <label>Your name<input name="name" type="text" required></label>
+          <label>Email<input name="email" type="email" required></label>
+          <label>Delivery address<input name="address" type="text" required placeholder="Street, apt, city"></label>
+          <label>Plan<select name="plan" required>
+            <option>Petite — $58 / week</option>
+            <option>Studio — $84 / every other week</option>
+            <option>Grand — $124 / week</option>
+          </select></label>
+          <button type="submit" class="modal-submit">Subscribe →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeModal(id) {
+      const m = document.getElementById(id);
+      m.classList.remove('open'); document.body.style.overflow = '';
+      setTimeout(() => { if (m.dataset.original) m.querySelector('.modal-body').innerHTML = m.dataset.original; }, 300);
+    }
+    function openArr(name) {
+      openModal('orderModal');
+      const sel = document.querySelector('#orderModal [name=arrangement]');
+      if (sel) for (const opt of sel.options) if (opt.text.startsWith(name.split(' —')[0])) { sel.value = opt.value || opt.text; break; }
+    }
+    document.querySelectorAll('.modal').forEach(m => { m.dataset.original = m.querySelector('.modal-body').innerHTML; });
+    document.addEventListener('click', (e) => { if (e.target.classList.contains('modal-backdrop')) { const m = e.target.closest('.modal'); if (m) closeModal(m.id); } });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.modal.open').forEach(m => closeModal(m.id)); });
+    document.addEventListener('submit', (e) => {
+      if (!e.target.matches('.modal form')) return;
+      e.preventDefault();
+      const form = e.target, modal = form.closest('.modal'), data = new FormData(form);
+      let html = form.dataset.success || '<h3>Done!</h3>';
+      for (const [k, v] of data.entries()) html = html.replace(new RegExp('\\{' + k + '\\}', 'g'), v || '');
+      modal.querySelector('.modal-body').innerHTML = `<div class="modal-success"><div class="check">✓</div>${html}<button class="modal-done-btn" onclick="closeModal('${modal.id}')">Close</button></div>`;
+    });
+  </script>
+</body>
+</html>

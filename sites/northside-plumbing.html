@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Northside Plumbing — Honest plumbers. Fast service.</title>
+<meta name="description" content="Northside Plumbing: 24/7 emergency plumbing, drain cleaning, water heater installs. Licensed & insured." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #0e2a4a;
+    --navy-dark: #061a30;
+    --orange: #ff6a14;
+    --orange-dark: #d8530a;
+    --gray: #f3f5f8;
+    --gray-2: #e3e8ef;
+    --text: #1a2434;
+    --muted: #5b6577;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #fff; color: var(--text); line-height: 1.55; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  a { color: inherit; }
+
+  .topstrip { background: var(--orange); color: #fff; padding: 8px 0; text-align: center; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; }
+  .topstrip strong { font-weight: 800; }
+
+  .nav { background: var(--navy); color: #fff; padding: 18px 0; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .logo { font-weight: 900; font-size: 22px; letter-spacing: -0.01em; display: flex; align-items: center; gap: 10px; }
+  .logo::before { content: ""; width: 30px; height: 30px; background: var(--orange); border-radius: 4px; display: inline-block; position: relative; }
+  .nav-cta { background: var(--orange); color: #fff; padding: 12px 22px; text-decoration: none; font-weight: 800; border-radius: 4px; font-size: 14px; letter-spacing: 0.02em; }
+  .nav-cta:hover { background: var(--orange-dark); }
+
+  .hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%); color: #fff; padding: 100px 0 120px; position: relative; overflow: hidden; }
+  .hero::before { content: ""; position: absolute; top: -100px; right: -100px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255, 106, 20, 0.18), transparent 60%); border-radius: 50%; }
+  .hero-inner { position: relative; max-width: 720px; }
+  .badge { display: inline-block; background: rgba(255, 106, 20, 0.15); border: 1px solid var(--orange); color: var(--orange); font-weight: 700; font-size: 12px; padding: 7px 14px; border-radius: 4px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 24px; }
+  .hero h1 { font-size: clamp(48px, 7vw, 84px); font-weight: 900; line-height: 1; letter-spacing: -0.03em; margin-bottom: 22px; }
+  .hero h1 span { color: var(--orange); }
+  .hero p { font-size: 20px; opacity: 0.85; margin-bottom: 36px; max-width: 560px; }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .btn-phone { display: inline-flex; align-items: center; gap: 12px; background: var(--orange); color: #fff; padding: 18px 32px; text-decoration: none; font-weight: 900; font-size: 22px; border-radius: 4px; letter-spacing: 0.01em; }
+  .btn-phone:hover { background: var(--orange-dark); }
+  .btn-phone .label { font-size: 11px; opacity: 0.85; letter-spacing: 0.15em; text-transform: uppercase; display: block; font-weight: 700; }
+  .btn-phone .num { font-size: 24px; line-height: 1; }
+  .btn-secondary { background: transparent; color: #fff; border: 2px solid #fff; padding: 16px 28px; text-decoration: none; font-weight: 700; border-radius: 4px; font-size: 15px; }
+  .btn-secondary:hover { background: #fff; color: var(--navy); }
+
+  .trustbar { background: var(--gray); padding: 30px 0; border-bottom: 1px solid var(--gray-2); }
+  .trustbar-inner { display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; gap: 24px; }
+  .trust-item { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--navy); font-size: 14px; }
+  .trust-item::before { content: "✓"; color: var(--orange); font-weight: 900; font-size: 20px; }
+
+  .section { padding: 90px 0; }
+  .section-head { text-align: center; max-width: 720px; margin: 0 auto 60px; }
+  .kicker { color: var(--orange); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 800; margin-bottom: 12px; display: inline-block; }
+  .section-head h2 { font-size: clamp(34px, 4.5vw, 52px); color: var(--navy); font-weight: 900; line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 14px; }
+  .section-head p { color: var(--muted); font-size: 17px; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .service { background: #fff; border: 1px solid var(--gray-2); padding: 28px; border-radius: 6px; transition: transform .2s, box-shadow .2s, border-color .2s; }
+  .service:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -20px rgba(14, 42, 74, 0.2); border-color: var(--orange); }
+  .service .icon { width: 48px; height: 48px; background: var(--navy); color: var(--orange); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; margin-bottom: 16px; }
+  .service h3 { color: var(--navy); font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+  .service p { color: var(--muted); font-size: 14px; }
+
+  .areas { background: var(--gray); }
+  .area-chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 900px; margin: 0 auto; }
+  .chip { padding: 10px 20px; background: #fff; border: 1px solid var(--gray-2); border-radius: 999px; font-weight: 600; font-size: 14px; color: var(--navy); }
+  .chip:hover { border-color: var(--orange); color: var(--orange); }
+
+  .cta { background: var(--navy); color: #fff; text-align: center; padding: 80px 0; }
+  .cta h2 { font-size: clamp(32px, 4vw, 48px); font-weight: 900; margin-bottom: 16px; line-height: 1.1; }
+  .cta h2 span { color: var(--orange); }
+  .cta p { opacity: 0.85; margin-bottom: 28px; }
+  .cta .btn-phone { background: var(--orange); }
+
+  .footer { background: var(--navy-dark); color: rgba(255,255,255,0.6); padding: 40px 0; text-align: center; font-size: 13px; }
+  .footer a { color: var(--orange); text-decoration: none; }
+  .footer .built { margin-top: 10px; font-size: 12px; }
+
+  @media (max-width: 900px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .section { padding: 70px 0; }
+    .hero { padding: 70px 0 80px; }
+  }
+</style>
+</head>
+<body>
+  <div class="topstrip">⚡ <strong>24/7 Emergency Service</strong> · Licensed & Insured · No Trip Charges</div>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="logo">NORTHSIDE PLUMBING</div>
+      <a href="#" onclick="event.preventDefault(); openModal('quoteModal');" class="nav-cta">Get a Quote</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <span class="badge">★★★★★ 4.9 / 5 from 312 reviews</span>
+      <h1>Plumbing problems? <span>We're 20 minutes away.</span></h1>
+      <p>Fast, honest, no-surprise pricing. Family-owned and serving the Northside since 2009.</p>
+      <div class="hero-cta">
+        <a href="tel:5550101234" class="btn-phone">
+          <div>
+            <span class="label">Call now</span>
+            <span class="num">(555) 010-1234</span>
+          </div>
+        </a>
+        <a href="#" onclick="event.preventDefault(); openModal('quoteModal');" class="btn-secondary">Request a Quote →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="trustbar">
+    <div class="container trustbar-inner">
+      <div class="trust-item">Licensed & Insured</div>
+      <div class="trust-item">Upfront Pricing</div>
+      <div class="trust-item">100% Satisfaction Guarantee</div>
+      <div class="trust-item">Family-Owned Since 2009</div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">What we do</span>
+        <h2>Plumbing services, done right the first time.</h2>
+        <p>From small drips to full repipes. If it involves a pipe, we fix it.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service">
+          <div class="icon">✦</div>
+          <h3>Emergency Repairs</h3>
+          <p>Burst pipes, overflows, no hot water. 24/7 response, 365 days a year.</p>
+        </div>
+        <div class="service">
+          <div class="icon">≋</div>
+          <h3>Drain Cleaning</h3>
+          <p>Slow drains, backups, root intrusion. Modern hydro-jetting and camera inspection.</p>
+        </div>
+        <div class="service">
+          <div class="icon">◉</div>
+          <h3>Water Heaters</h3>
+          <p>Tank and tankless installs, repairs, and yearly maintenance.</p>
+        </div>
+        <div class="service">
+          <div class="icon">⌂</div>
+          <h3>Repipes & Remodels</h3>
+          <p>Whole-home repipes, kitchen and bath remodels, new construction.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section areas">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Service Areas</span>
+        <h2>If you can see Northside from your roof, we'll come fix your plumbing.</h2>
+      </div>
+      <div class="area-chips">
+        <span class="chip">Northside</span>
+        <span class="chip">Eastvale</span>
+        <span class="chip">Brookhaven</span>
+        <span class="chip">Maple Park</span>
+        <span class="chip">Linden Hills</span>
+        <span class="chip">Cedar Grove</span>
+        <span class="chip">Riverside</span>
+        <span class="chip">Westgate</span>
+        <span class="chip">Old Town</span>
+        <span class="chip">Hillcrest</span>
+        <span class="chip">Lakeshore</span>
+        <span class="chip">Bayview</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="quote">
+    <div class="container">
+      <h2>Got a leak? <span>Pick up the phone.</span></h2>
+      <p>Most calls answered in under 30 seconds. Most jobs scheduled the same day.</p>
+      <a href="tel:5550101234" class="btn-phone">
+        <div>
+          <span class="label">Call now</span>
+          <span class="num">(555) 010-1234</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 Northside Plumbing · Licensed #PL-0042138</p>
+      <p class="built">Site built by <a href="../index.html">ZYDE</a></p>
+    </div>
+  </footer>
+
+  <style>
+    .modal { position: fixed; inset: 0; z-index: 1000; display: none; }
+    .modal.open { display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .modal-backdrop { position: absolute; inset: 0; background: rgba(6, 26, 48, 0.7); backdrop-filter: blur(8px); }
+    .modal-card { position: relative; background: #fff; color: var(--text); max-width: 460px; width: 100%; padding: 44px 38px; border-radius: 6px; max-height: 92vh; overflow-y: auto; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5); border-top: 4px solid var(--orange); }
+    .modal-x { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; background: rgba(14, 42, 74, 0.08); border: 0; border-radius: 50%; font-size: 22px; cursor: pointer; color: var(--navy); display: flex; align-items: center; justify-content: center; }
+    .modal-x:hover { background: var(--orange); color: #fff; }
+    .modal-eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 800; margin-bottom: 12px; color: var(--orange); }
+    .modal-title { font-size: 32px; line-height: 1.0; margin-bottom: 8px; color: var(--navy); font-weight: 900; letter-spacing: -0.02em; }
+    .modal-title span { color: var(--orange); }
+    .modal-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+    .modal-card form { display: flex; flex-direction: column; gap: 12px; }
+    .modal-card form label { display: flex; flex-direction: column; gap: 6px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--navy); font-weight: 700; }
+    .modal-card form input, .modal-card form select, .modal-card form textarea { padding: 13px 14px; border: 1px solid var(--gray-2); font-family: inherit; font-size: 15px; border-radius: 4px; background: #fff; color: var(--text); font-weight: 400; letter-spacing: 0; text-transform: none; resize: vertical; }
+    .modal-card form input:focus, .modal-card form select:focus, .modal-card form textarea:focus { outline: none; border-color: var(--orange); }
+    .modal-submit { margin-top: 6px; padding: 16px 24px; background: var(--orange); color: #fff; border: 0; border-radius: 4px; font-size: 14px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; font-family: inherit; }
+    .modal-submit:hover { background: var(--orange-dark); }
+    .modal-success { text-align: center; padding: 16px 0; }
+    .modal-success .check { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: var(--orange); color: #fff; font-size: 32px; margin-bottom: 22px; }
+    .modal-success p { color: var(--muted); margin-top: 10px; line-height: 1.55; font-size: 15px; }
+    .modal-done-btn { margin-top: 24px; padding: 12px 22px; background: transparent; border: 1px solid var(--navy); border-radius: 4px; cursor: pointer; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 800; color: var(--navy); font-family: inherit; }
+    .modal-done-btn:hover { background: var(--navy); color: #fff; }
+  </style>
+
+  <div class="modal" id="quoteModal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <button class="modal-x" onclick="closeModal('quoteModal')" aria-label="Close">×</button>
+      <div class="modal-body">
+        <div class="modal-eyebrow">— Free Quote</div>
+        <h3 class="modal-title">Tell us <span>what's wrong.</span></h3>
+        <p class="modal-sub">We'll call you back within 30 minutes with a no-surprise estimate.</p>
+        <form data-success="<h3 class='modal-title'>On the way, <span>{name}!</span></h3><p>We'll call {phone} within 30 minutes. If it's an emergency, hit the phone button to skip the line.</p>">
+          <label>Your name<input name="name" type="text" required placeholder="First and last"></label>
+          <label>Phone<input name="phone" type="tel" required placeholder="(555) 123-4567"></label>
+          <label>Address<input name="address" type="text" required placeholder="Street and city"></label>
+          <label>What's going on?<select name="issue" required>
+            <option>Burst pipe / leak</option>
+            <option>No hot water</option>
+            <option>Drain backup</option>
+            <option>Water heater install</option>
+            <option>Toilet / sink / faucet</option>
+            <option>Something else</option>
+          </select></label>
+          <label>How urgent?<select name="urgency">
+            <option>It can wait a few days</option>
+            <option>Within 24 hours</option>
+            <option>Emergency — call me now</option>
+          </select></label>
+          <button type="submit" class="modal-submit">Send for free quote →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeModal(id) {
+      const m = document.getElementById(id);
+      m.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(() => { if (m.dataset.original) m.querySelector('.modal-body').innerHTML = m.dataset.original; }, 300);
+    }
+    document.querySelectorAll('.modal').forEach(m => { m.dataset.original = m.querySelector('.modal-body').innerHTML; });
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('modal-backdrop')) { const m = e.target.closest('.modal'); if (m) closeModal(m.id); }
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.modal.open').forEach(m => closeModal(m.id)); });
+    document.addEventListener('submit', (e) => {
+      if (!e.target.matches('.modal form')) return;
+      e.preventDefault();
+      const form = e.target, modal = form.closest('.modal'), data = new FormData(form);
+      let html = form.dataset.success || '<h3>Done!</h3>';
+      for (const [k, v] of data.entries()) html = html.replace(new RegExp('\\{' + k + '\\}', 'g'), v || '');
+      modal.querySelector('.modal-body').innerHTML = `<div class="modal-success"><div class="check">✓</div>${html}<button class="modal-done-btn" onclick="closeModal('${modal.id}')">Close</button></div>`;
+    });
+  </script>
+</body>
+</html>

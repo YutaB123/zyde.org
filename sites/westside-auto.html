@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Westside Auto Repair — Honest mechanics. Fair prices.</title>
+<meta name="description" content="Westside Auto Repair: ASE-certified mechanics, transparent pricing, free written quotes. Serving the Westside since 1996." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --red: #a8160e;
+    --red-dark: #770b06;
+    --black: #0e0e0e;
+    --steel: #2a2a2a;
+    --gray: #f3f3f5;
+    --gray-2: #d8d8dc;
+    --text: #1a1a1a;
+    --muted: #5a5a60;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #fff; color: var(--text); line-height: 1.55; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; letter-spacing: 0.005em; line-height: 1; text-transform: uppercase; }
+
+  .topbar { background: var(--black); color: #fff; padding: 8px 0; font-size: 13px; }
+  .topbar-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+  .topbar a { color: var(--red); font-weight: 700; }
+
+  .nav { background: #fff; padding: 18px 0; border-bottom: 4px solid var(--red); position: sticky; top: 0; z-index: 50; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 14px; font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.01em; }
+  .logo .badge { width: 38px; height: 38px; background: var(--red); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 900; font-family: 'Barlow Condensed', sans-serif; font-size: 22px; clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%); }
+  .nav-cta { background: var(--red); color: #fff; padding: 12px 24px; font-weight: 800; text-transform: uppercase; font-size: 14px; letter-spacing: 0.06em; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%); padding-right: 32px; }
+  .nav-cta:hover { background: var(--red-dark); }
+
+  .hero { background: var(--black); color: #fff; padding: 110px 0 130px; position: relative; overflow: hidden; }
+  .hero::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      linear-gradient(135deg, transparent 60%, rgba(168, 22, 14, 0.35) 100%),
+      repeating-linear-gradient(45deg, transparent 0 40px, rgba(255,255,255,0.015) 40px 41px);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; max-width: 820px; }
+  .badge { display: inline-block; background: var(--red); color: #fff; font-weight: 800; font-size: 12px; padding: 8px 16px; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 26px; }
+  .hero h1 { font-size: clamp(58px, 9vw, 120px); margin-bottom: 22px; color: #fff; }
+  .hero h1 span { color: var(--red); }
+  .hero p { font-size: 19px; opacity: 0.85; margin-bottom: 36px; max-width: 580px; font-family: 'Inter', sans-serif; text-transform: none; font-weight: 400; line-height: 1.5; }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 18px 32px; font-weight: 800; text-transform: uppercase; font-size: 14px; letter-spacing: 0.08em; transition: background .2s, transform .15s; }
+  .btn-primary { background: var(--red); color: #fff; clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%); padding-right: 42px; }
+  .btn-primary:hover { background: var(--red-dark); transform: translateX(2px); }
+  .btn-ghost { background: transparent; color: #fff; border: 2px solid #fff; }
+  .btn-ghost:hover { background: #fff; color: var(--black); }
+
+  .stats { background: var(--red); color: #fff; padding: 36px 0; }
+  .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
+  .stat strong { font-family: 'Barlow Condensed', sans-serif; font-size: 48px; font-weight: 900; line-height: 1; display: block; margin-bottom: 4px; }
+  .stat span { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.9; font-weight: 600; }
+
+  .section { padding: 90px 0; }
+  .section-head { max-width: 820px; margin: 0 auto 50px; text-align: center; }
+  .kicker { color: var(--red); font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 800; display: inline-block; margin-bottom: 12px; }
+  .section-head h2 { font-size: clamp(40px, 5.5vw, 64px); color: var(--black); margin-bottom: 14px; }
+  .section-head p { color: var(--muted); font-size: 17px; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--gray-2); }
+  .service { padding: 36px 30px; border-right: 1px solid var(--gray-2); border-bottom: 1px solid var(--gray-2); position: relative; }
+  .service:nth-child(3n) { border-right: 0; }
+  .service:nth-last-child(-n+3) { border-bottom: 0; }
+  .service .num { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 800; color: var(--red); letter-spacing: 0.18em; margin-bottom: 14px; display: inline-block; }
+  .service h3 { font-size: 26px; color: var(--black); margin-bottom: 10px; }
+  .service p { color: var(--muted); font-size: 14px; }
+
+  .certs { background: var(--black); color: #fff; padding: 70px 0; }
+  .certs-inner { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; align-items: center; }
+  .cert { display: flex; align-items: center; gap: 12px; font-weight: 700; font-family: 'Barlow Condensed', sans-serif; font-size: 22px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .cert .dot { width: 12px; height: 12px; background: var(--red); border-radius: 50%; }
+
+  .quote-section { background: var(--gray); padding: 100px 0; }
+  .quote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .quote-grid h2 { font-size: clamp(40px, 5vw, 60px); margin-bottom: 18px; color: var(--black); }
+  .quote-grid h2 span { color: var(--red); }
+  .quote-grid p { color: var(--muted); font-size: 17px; margin-bottom: 24px; }
+  .quote-grid ul { list-style: none; }
+  .quote-grid li { padding: 10px 0 10px 32px; position: relative; font-weight: 600; }
+  .quote-grid li::before { content: "✓"; position: absolute; left: 0; color: var(--red); font-weight: 900; font-size: 20px; }
+  .quote-form { background: #fff; padding: 36px; border-top: 4px solid var(--red); display: flex; flex-direction: column; gap: 14px; }
+  .quote-form input, .quote-form select, .quote-form textarea { padding: 12px 14px; border: 1px solid var(--gray-2); font-family: inherit; font-size: 15px; background: #fff; color: var(--text); }
+  .quote-form input:focus, .quote-form select:focus, .quote-form textarea:focus { outline: none; border-color: var(--red); }
+  .quote-form button { padding: 16px; background: var(--red); color: #fff; border: 0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; font-size: 14px; }
+  .quote-form button:hover { background: var(--red-dark); }
+
+  .footer { background: var(--steel); color: rgba(255,255,255,0.7); padding: 40px 0; text-align: center; font-size: 13px; }
+  .footer a { color: var(--red); font-weight: 700; }
+  .footer .built { margin-top: 10px; }
+
+  @media (max-width: 900px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .service { border-right: 0; border-bottom: 1px solid var(--gray-2); }
+    .service:last-child { border-bottom: 0; }
+    .quote-grid, .stats-inner { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .stats-inner { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .quote-grid { grid-template-columns: 1fr; gap: 30px; }
+    .section { padding: 70px 0; }
+    .hero { padding: 70px 0 80px; }
+  }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div>📍 412 Industrial Ave · Mon–Fri 7am–6pm · Sat 8am–2pm</div>
+      <div><a href="tel:5550199876">(555) 019-9876</a> · ASE Certified</div>
+    </div>
+  </div>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="logo">
+        <div class="badge">W</div>
+        Westside Auto
+      </div>
+      <a href="#quote" class="nav-cta">Free Quote</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <span class="badge">★★★★★ 4.8 / 5 · 580+ reviews</span>
+      <h1>Honest auto repair.<br/><span>Since 1996.</span></h1>
+      <p>Family-owned shop. ASE-certified mechanics. Written quotes before we touch your car. We've fixed three generations of Westside cars — yours is next.</p>
+      <div class="hero-cta">
+        <a href="#quote" class="btn btn-primary">Get a free quote</a>
+        <a href="tel:5550199876" class="btn btn-ghost">Call (555) 019-9876</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="container stats-inner">
+      <div class="stat"><strong>30</strong><span>Years in business</span></div>
+      <div class="stat"><strong>4.8★</strong><span>Average rating</span></div>
+      <div class="stat"><strong>580+</strong><span>5-star reviews</span></div>
+      <div class="stat"><strong>2-Yr</strong><span>Warranty on all work</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">What we fix</span>
+        <h2>If it's on your car, we work on it.</h2>
+        <p>From oil changes to engine rebuilds. Foreign and domestic, electric and hybrid.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service">
+          <span class="num">01</span>
+          <h3>Brakes & Suspension</h3>
+          <p>Pads, rotors, shocks, struts, alignments. Stop on a dime, ride like new.</p>
+        </div>
+        <div class="service">
+          <span class="num">02</span>
+          <h3>Engine Diagnostics</h3>
+          <p>Check engine light on? We'll find the cause, fix it once, and explain it plainly.</p>
+        </div>
+        <div class="service">
+          <span class="num">03</span>
+          <h3>Transmissions</h3>
+          <p>Service, repair, and rebuilds. Automatic, manual, and CVT — all makes.</p>
+        </div>
+        <div class="service">
+          <span class="num">04</span>
+          <h3>Oil & Maintenance</h3>
+          <p>Scheduled maintenance done right. We follow the manufacturer's book.</p>
+        </div>
+        <div class="service">
+          <span class="num">05</span>
+          <h3>A/C & Heating</h3>
+          <p>Recharge, leak detection, compressor work. Cold air all summer, guaranteed.</p>
+        </div>
+        <div class="service">
+          <span class="num">06</span>
+          <h3>Electric & Hybrid</h3>
+          <p>Battery diagnostics, regenerative brakes, charging systems. Certified on Tesla and beyond.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="certs">
+    <div class="container certs-inner">
+      <div class="cert"><span class="dot"></span> ASE Certified</div>
+      <div class="cert"><span class="dot"></span> AAA Approved</div>
+      <div class="cert"><span class="dot"></span> Tesla Approved</div>
+      <div class="cert"><span class="dot"></span> BBB Accredited A+</div>
+    </div>
+  </section>
+
+  <section class="quote-section" id="quote">
+    <div class="container quote-grid">
+      <div>
+        <span class="kicker">Get a free quote</span>
+        <h2>Tell us what's <span>wrong.</span></h2>
+        <p>No pressure, no hidden fees. We'll get back to you with a written estimate within one business day.</p>
+        <ul>
+          <li>Free written quote, every time</li>
+          <li>No diagnostic fee with repair</li>
+          <li>Loaner cars available</li>
+          <li>2-year / 24,000-mile warranty</li>
+        </ul>
+      </div>
+      <form class="quote-form" id="quoteForm" onsubmit="return submitWestsideQuote(event);">
+        <input name="name" type="text" placeholder="Your name" required />
+        <input name="phone" type="tel" placeholder="Phone number" required />
+        <input name="vehicle" type="text" placeholder="Year / Make / Model" required />
+        <select name="issue" required>
+          <option value="">What's going on? (pick one)</option>
+          <option>Check engine light</option>
+          <option>Brakes / suspension</option>
+          <option>Won't start</option>
+          <option>Routine maintenance</option>
+          <option>Something else</option>
+        </select>
+        <textarea name="notes" rows="3" placeholder="Anything else we should know?"></textarea>
+        <button type="submit">Send for free quote →</button>
+      </form>
+      <script>
+        function submitWestsideQuote(e) {
+          e.preventDefault();
+          const f = e.target;
+          const data = new FormData(f);
+          const name = (data.get('name') || '').toString().trim();
+          const phone = (data.get('phone') || '').toString().trim();
+          const vehicle = (data.get('vehicle') || '').toString().trim();
+          f.innerHTML = `
+            <div style="text-align:center; padding: 20px 0;">
+              <div style="display:inline-flex; align-items:center; justify-content:center; width:64px; height:64px; border-radius:50%; background:#a8160e; color:#fff; font-size:32px; margin-bottom:18px;">✓</div>
+              <h3 style="font-family:'Barlow Condensed', sans-serif; font-size:36px; font-weight:900; text-transform:uppercase; color:#0e0e0e; margin-bottom:10px; line-height:1;">Got it, ${name}!</h3>
+              <p style="color:#5a5a60; font-size:15px; line-height:1.55;">We'll call ${phone} within one business day with a written estimate for the ${vehicle}.</p>
+            </div>`;
+          return false;
+        }
+      </script>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 Westside Auto Repair · 412 Industrial Ave · (555) 019-9876</p>
+      <p class="built">Site built by <a href="../index.html">ZYDE</a></p>
+    </div>
+  </footer>
+</body>
+</html>

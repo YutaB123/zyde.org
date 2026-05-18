@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bluebird Salon — Hair, treated like it matters</title>
+<meta name="description" content="Bluebird Salon: cut, color, and care from a small, independent team. Book online or walk in." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #0d0d0e;
+    --black: #1a1a1c;
+    --pink: #f4c4cc;
+    --pink-deep: #d68d99;
+    --blush: #fbe9ec;
+    --gold: #c4a065;
+    --cream: #fbf8f4;
+    --muted: #8a8a90;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.55; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, .display { font-family: 'Italiana', serif; font-weight: 400; line-height: 1.0; letter-spacing: 0.005em; }
+
+  /* SPLIT-SCREEN HERO */
+  .split {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    min-height: 100vh;
+  }
+  .split-left {
+    background: var(--ink); color: var(--cream);
+    padding: 50px 56px;
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+  .split-left::before {
+    content: ""; position: absolute; top: 36px; left: 56px; right: 56px;
+    height: 1px; background: rgba(255,255,255,0.15);
+  }
+  .brand-line {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-top: 50px;
+    font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold);
+    font-weight: 500;
+  }
+  .brand-line .meta { color: rgba(255,255,255,0.45); }
+  .split-title-wrap { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px 0; }
+  .split-title {
+    font-family: 'Italiana', serif;
+    font-size: clamp(64px, 9vw, 132px);
+    line-height: 0.88;
+    margin-bottom: 28px;
+  }
+  .split-title em { color: var(--pink); font-style: italic; }
+  .split-sub { font-size: 18px; color: rgba(255,255,255,0.7); max-width: 380px; margin-bottom: 36px; line-height: 1.6; font-family: 'Italiana', serif; font-size: 22px; line-height: 1.4; }
+
+  .services-list { list-style: none; margin-bottom: 36px; }
+  .services-list li {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    font-size: 15px;
+    transition: color .2s, padding-left .2s;
+  }
+  .services-list li:hover { color: var(--pink); padding-left: 8px; }
+  .services-list .name { font-family: 'Italiana', serif; font-size: 22px; }
+  .services-list .price { font-family: 'Inter', sans-serif; font-size: 14px; color: rgba(255,255,255,0.6); letter-spacing: 0.04em; font-variant-numeric: tabular-nums; }
+
+  .split-cta-row { display: flex; align-items: center; gap: 18px; }
+  .btn-gold {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 30px;
+    background: var(--pink); color: var(--ink);
+    font-size: 13px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    border-radius: 0;
+    transition: background .2s;
+  }
+  .btn-gold:hover { background: var(--gold); color: var(--cream); }
+  .split-phone { font-size: 13px; color: rgba(255,255,255,0.55); letter-spacing: 0.04em; }
+  .split-phone a { color: var(--pink); }
+
+  .split-right {
+    background: url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1400&q=80&auto=format&fit=crop') center/cover #d68d99;
+    position: relative;
+  }
+  .split-right::after {
+    content: "— Cut on a Thursday";
+    position: absolute; bottom: 36px; right: 36px;
+    background: rgba(255,255,255,0.9); color: var(--ink);
+    padding: 10px 18px;
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 600;
+    backdrop-filter: blur(4px);
+  }
+
+  /* STYLISTS */
+  .stylists { padding: 120px 0; background: var(--cream); }
+  .section-eyebrow { font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--pink-deep); font-weight: 600; margin-bottom: 14px; text-align: center; }
+  .section-title { text-align: center; font-size: clamp(40px, 5.5vw, 72px); margin-bottom: 64px; }
+  .section-title em { color: var(--pink-deep); font-style: italic; }
+  .stylist-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .stylist { text-align: center; }
+  .stylist .pic { aspect-ratio: 4/5; margin-bottom: 18px; }
+  .stylist-1 .pic { background: url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&q=80&auto=format&fit=crop') center/cover #f4c4cc; }
+  .stylist-2 .pic { background: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&q=80&auto=format&fit=crop') center/cover #f4c4cc; }
+  .stylist-3 .pic { background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80&auto=format&fit=crop') center/cover #f4c4cc; }
+  .stylist-4 .pic { background: url('https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=500&q=80&auto=format&fit=crop') center/cover #f4c4cc; }
+  .stylist h3 { font-family: 'Italiana', serif; font-size: 26px; margin-bottom: 4px; }
+  .stylist .role { font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--pink-deep); margin-bottom: 10px; font-weight: 500; }
+  .stylist .yrs { font-size: 13px; color: var(--muted); font-style: italic; }
+
+  /* PROCESS — 3-step horizontal */
+  .process { background: var(--blush); padding: 110px 0; }
+  .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; max-width: 980px; margin: 0 auto; }
+  .step {
+    padding: 0 36px;
+    text-align: center;
+    border-right: 1px solid rgba(13, 13, 14, 0.12);
+  }
+  .step:last-child { border-right: 0; }
+  .step .num {
+    display: inline-block;
+    font-family: 'Italiana', serif;
+    font-size: 56px;
+    color: var(--pink-deep);
+    line-height: 1;
+    margin-bottom: 18px;
+  }
+  .step h3 { font-family: 'Italiana', serif; font-size: 26px; margin-bottom: 12px; }
+  .step p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* BOOK */
+  .book { padding: 120px 0; background: var(--ink); color: var(--cream); text-align: center; position: relative; overflow: hidden; }
+  .book::before {
+    content: "BLUEBIRD";
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Italiana', serif;
+    font-size: clamp(120px, 22vw, 320px);
+    color: rgba(244, 196, 204, 0.05);
+    letter-spacing: 0.06em;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .book .inner { position: relative; }
+  .book h2 { font-size: clamp(40px, 6vw, 84px); color: var(--cream); margin-bottom: 20px; }
+  .book h2 em { color: var(--pink); font-style: italic; }
+  .book p { font-family: 'Italiana', serif; font-size: 22px; color: rgba(255,255,255,0.7); margin-bottom: 36px; }
+  .book .btn-gold { background: var(--pink); color: var(--ink); }
+  .book .btn-gold:hover { background: var(--cream); }
+
+  .footer { padding: 32px 0; background: var(--ink); color: rgba(255,255,255,0.55); text-align: center; font-size: 12px; letter-spacing: 0.1em; border-top: 1px solid rgba(255,255,255,0.08); }
+  .footer a { color: var(--pink); }
+
+  @media (max-width: 900px) {
+    .split { grid-template-columns: 1fr; }
+    .split-right { min-height: 60vh; }
+    .split-left { padding: 40px 28px; }
+    .split-left::before { left: 28px; right: 28px; }
+    .stylist-grid { grid-template-columns: repeat(2, 1fr); }
+    .process-grid { grid-template-columns: 1fr; }
+    .step { border-right: 0; border-bottom: 1px solid rgba(13, 13, 14, 0.12); padding: 30px 0; }
+    .step:last-child { border-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+  <section class="split">
+    <div class="split-left">
+      <div class="brand-line">
+        <span>BLUEBIRD · EST. 2017</span>
+        <span class="meta">Open · 5 chairs</span>
+      </div>
+      <div class="split-title-wrap">
+        <h1 class="split-title">Hair,<br/>treated like it <em>matters.</em></h1>
+        <p class="split-sub">A small, independent salon. Honest consultations, careful cuts, no upsells.</p>
+
+        <ul class="services-list">
+          <li><span class="name">Cut + style</span><span class="price">From $85</span></li>
+          <li><span class="name">Color · single-process</span><span class="price">From $130</span></li>
+          <li><span class="name">Balayage</span><span class="price">From $220</span></li>
+          <li><span class="name">Hydration treatment</span><span class="price">From $55</span></li>
+          <li><span class="name">Blow-out</span><span class="price">From $55</span></li>
+        </ul>
+
+        <div class="split-cta-row">
+          <a href="#" onclick="event.preventDefault(); openModal('chairModal');" class="btn-gold">Book your chair →</a>
+          <span class="split-phone">or call <a href="tel:5550881111">(555) 088-1111</a></span>
+        </div>
+      </div>
+    </div>
+    <div class="split-right" aria-hidden="true"></div>
+  </section>
+
+  <section class="stylists">
+    <div class="container">
+      <div class="section-eyebrow">— The team</div>
+      <h2 class="section-title">Five chairs. <em>Five hands you'll know by name.</em></h2>
+      <div class="stylist-grid">
+        <div class="stylist stylist-1">
+          <div class="pic"></div>
+          <h3>Anouk</h3>
+          <div class="role">Founder · Color</div>
+          <div class="yrs">14 years</div>
+        </div>
+        <div class="stylist stylist-2">
+          <div class="pic"></div>
+          <h3>Tess</h3>
+          <div class="role">Senior · Cut</div>
+          <div class="yrs">9 years</div>
+        </div>
+        <div class="stylist stylist-3">
+          <div class="pic"></div>
+          <h3>Mateo</h3>
+          <div class="role">Stylist · Curl specialist</div>
+          <div class="yrs">7 years</div>
+        </div>
+        <div class="stylist stylist-4">
+          <div class="pic"></div>
+          <h3>Jules</h3>
+          <div class="role">Apprentice · Cut</div>
+          <div class="yrs">2 years</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process">
+    <div class="container">
+      <div class="section-eyebrow">— What to expect</div>
+      <h2 class="section-title">No rush. <em>No upsells.</em></h2>
+      <div class="process-grid">
+        <div class="step">
+          <span class="num">01</span>
+          <h3>A real consult</h3>
+          <p>We sit down before scissors come out. Hair, history, what you want, what you don't.</p>
+        </div>
+        <div class="step">
+          <span class="num">02</span>
+          <h3>One chair at a time</h3>
+          <p>Your stylist is yours for the appointment. No double-booking, no rotating between heads.</p>
+        </div>
+        <div class="step">
+          <span class="num">03</span>
+          <h3>A finish you can repeat</h3>
+          <p>We show you how to style it at home, and send you out with notes if you want them.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="book" id="book">
+    <div class="container inner">
+      <h2>Book a <em>chair.</em></h2>
+      <p>New clients always welcome. Same-week availability most weeks.</p>
+      <a href="#" onclick="event.preventDefault(); openModal('chairModal');" class="btn-gold">Open the calendar →</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 Bluebird Salon — Site built by <a href="../index.html">ZYDE</a>
+    </div>
+  </footer>
+
+  <style>
+    .modal { position: fixed; inset: 0; z-index: 1000; display: none; }
+    .modal.open { display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .modal-backdrop { position: absolute; inset: 0; background: rgba(13, 13, 14, 0.7); backdrop-filter: blur(8px); }
+    .modal-card { position: relative; background: var(--cream); color: var(--ink); max-width: 460px; width: 100%; padding: 44px 38px; border-radius: 0; max-height: 92vh; overflow-y: auto; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.6); border-top: 4px solid var(--pink-deep); }
+    .modal-x { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; background: transparent; border: 1px solid rgba(13, 13, 14, 0.15); border-radius: 0; font-size: 22px; cursor: pointer; color: var(--ink); display: flex; align-items: center; justify-content: center; }
+    .modal-x:hover { background: var(--ink); color: var(--pink); border-color: var(--ink); }
+    .modal-eyebrow { font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; font-weight: 700; margin-bottom: 14px; color: var(--pink-deep); }
+    .modal-title { font-family: 'Italiana', serif; font-size: 44px; line-height: 1.0; margin-bottom: 8px; color: var(--ink); font-weight: 400; }
+    .modal-title em { font-style: italic; color: var(--pink-deep); }
+    .modal-sub { font-size: 14px; color: var(--muted); margin-bottom: 26px; line-height: 1.5; }
+    .modal-card form { display: flex; flex-direction: column; gap: 12px; }
+    .modal-card form label { display: flex; flex-direction: column; gap: 6px; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink); font-weight: 700; }
+    .modal-card form input, .modal-card form select { padding: 13px 14px; border: 1px solid rgba(13, 13, 14, 0.18); font-family: inherit; font-size: 15px; border-radius: 0; background: #fff; color: var(--ink); font-weight: 400; letter-spacing: 0; text-transform: none; }
+    .modal-card form input:focus, .modal-card form select:focus { outline: none; border-color: var(--pink-deep); }
+    .modal-card form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .modal-submit { margin-top: 8px; padding: 16px 30px; background: var(--ink); color: var(--cream); border: 0; border-radius: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; cursor: pointer; font-family: inherit; }
+    .modal-submit:hover { background: var(--pink-deep); }
+    .modal-success { text-align: center; padding: 16px 0; }
+    .modal-success .check { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: var(--pink); color: var(--ink); font-size: 32px; margin-bottom: 22px; }
+    .modal-success p { color: var(--muted); margin-top: 10px; font-family: 'Italiana', serif; font-size: 18px; line-height: 1.55; }
+    .modal-done-btn { margin-top: 24px; padding: 12px 26px; background: transparent; border: 1px solid var(--ink); border-radius: 0; cursor: pointer; font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 700; color: var(--ink); font-family: inherit; }
+    .modal-done-btn:hover { background: var(--ink); color: var(--cream); }
+  </style>
+
+  <div class="modal" id="chairModal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <button class="modal-x" onclick="closeModal('chairModal')">×</button>
+      <div class="modal-body">
+        <div class="modal-eyebrow">— Book a chair</div>
+        <h3 class="modal-title">Let's get you <em>in.</em></h3>
+        <p class="modal-sub">We'll confirm by text within an hour. No deposit, no card on file.</p>
+        <form data-success="<h3 class='modal-title'>Chair booked, <em>{name}!</em></h3><p>Your {service} with {stylist} is held for {date} at {time}. Confirmation coming to {phone}.</p>">
+          <label>Your name<input name="name" type="text" required></label>
+          <label>Phone<input name="phone" type="tel" required placeholder="(555) 123-4567"></label>
+          <label>Service<select name="service" required>
+            <option>Cut + style — from $85</option>
+            <option>Color · single-process — from $130</option>
+            <option>Balayage — from $220</option>
+            <option>Hydration treatment — from $55</option>
+            <option>Blow-out — from $55</option>
+          </select></label>
+          <label>Stylist<select name="stylist" required>
+            <option>No preference</option>
+            <option>Anouk — founder, color</option>
+            <option>Tess — senior, cut</option>
+            <option>Mateo — curl specialist</option>
+            <option>Jules — apprentice, cut</option>
+          </select></label>
+          <div class="row">
+            <label>Date<input name="date" type="date" required></label>
+            <label>Time<select name="time" required>
+              <option>10:00 am</option><option>11:00 am</option><option>12:30 pm</option>
+              <option>2:00 pm</option><option>3:30 pm</option><option>5:00 pm</option>
+              <option>6:30 pm</option>
+            </select></label>
+          </div>
+          <button type="submit" class="modal-submit">Book the chair →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeModal(id) {
+      const m = document.getElementById(id);
+      m.classList.remove('open'); document.body.style.overflow = '';
+      setTimeout(() => { if (m.dataset.original) m.querySelector('.modal-body').innerHTML = m.dataset.original; }, 300);
+    }
+    document.querySelectorAll('.modal').forEach(m => { m.dataset.original = m.querySelector('.modal-body').innerHTML; });
+    document.addEventListener('click', (e) => { if (e.target.classList.contains('modal-backdrop')) { const m = e.target.closest('.modal'); if (m) closeModal(m.id); } });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.modal.open').forEach(m => closeModal(m.id)); });
+    document.addEventListener('submit', (e) => {
+      if (!e.target.matches('.modal form')) return;
+      e.preventDefault();
+      const form = e.target, modal = form.closest('.modal'), data = new FormData(form);
+      let html = form.dataset.success || '<h3>Done!</h3>';
+      for (const [k, v] of data.entries()) html = html.replace(new RegExp('\\{' + k + '\\}', 'g'), v || '');
+      modal.querySelector('.modal-body').innerHTML = `<div class="modal-success"><div class="check">✓</div>${html}<button class="modal-done-btn" onclick="closeModal('${modal.id}')">Close</button></div>`;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Linden Bakery — Daily bread, made by hand</title>
+<meta name="description" content="Linden Bakery: small neighborhood bakery. Sourdough, croissants, and pastries baked every morning. Sold out by 2pm." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --blush: #f2dcd0;
+    --blush-2: #e9c7b5;
+    --cream: #fbf3e8;
+    --espresso: #2a1810;
+    --copper: #b35b2e;
+    --ink: #2a1810;
+    --muted: #7c6356;
+    --rule: rgba(42, 24, 16, 0.16);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--blush); color: var(--ink); line-height: 1.55; }
+  .container { max-width: 920px; margin: 0 auto; padding: 0 28px; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, .serif { font-family: 'Bodoni Moda', serif; font-weight: 500; letter-spacing: -0.01em; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  .nav { padding: 26px 0; }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+  .logo-mark { display: flex; align-items: center; gap: 10px; font-family: 'Bodoni Moda', serif; font-weight: 700; font-size: 20px; letter-spacing: -0.005em; }
+  .logo-mark::before { content: ""; width: 24px; height: 24px; border-radius: 50%; background: var(--copper); }
+  .nav-meta { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); }
+
+  /* HERO — typographic menu */
+  .hero { padding: 70px 0 80px; }
+  .hero-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 12px;
+    margin-bottom: 36px;
+  }
+  .hero-head .label { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--copper); font-weight: 600; }
+  .hero-head .date { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.16em; color: var(--muted); text-transform: uppercase; }
+  .hero h1 {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(72px, 13vw, 180px);
+    line-height: 0.92;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    margin-bottom: 18px;
+    color: var(--ink);
+  }
+  .hero h1 em { font-style: italic; font-weight: 500; color: var(--copper); }
+  .hero-tag { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 22px; color: var(--muted); margin-bottom: 56px; }
+
+  /* MENU */
+  .menu-block { padding: 0 0 80px; }
+  .menu-block .menu-title { font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--copper); margin-bottom: 24px; font-weight: 700; }
+  .menu-item {
+    display: grid;
+    grid-template-columns: 32px 1fr auto;
+    gap: 18px;
+    align-items: baseline;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+    transition: background .15s, transform .15s;
+  }
+  .menu-item:hover { background: rgba(255, 255, 255, 0.4); }
+  .menu-item .num { font-family: 'JetBrains Mono', monospace; color: var(--copper); font-size: 13px; font-weight: 600; }
+  .menu-item .body { display: flex; flex-direction: column; gap: 4px; }
+  .menu-item h3 { font-family: 'Bodoni Moda', serif; font-size: 26px; line-height: 1.1; font-weight: 500; }
+  .menu-item h3 em { color: var(--muted); font-weight: 500; font-style: italic; font-size: 18px; margin-left: 8px; }
+  .menu-item p { font-size: 14px; color: var(--muted); }
+  .menu-item .price { font-family: 'Bodoni Moda', serif; font-size: 24px; color: var(--ink); font-weight: 500; font-variant-numeric: tabular-nums; }
+  .menu-item.sold .price { text-decoration: line-through; color: var(--muted); }
+  .menu-item.sold::after { content: "Sold out"; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--copper); position: absolute; right: 0; margin-top: 32px; }
+
+  .menu-foot { margin-top: 28px; padding-top: 24px; border-top: 2px solid var(--ink); display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); flex-wrap: wrap; gap: 12px; }
+
+  /* ABOUT — wide image right */
+  .about { background: var(--cream); padding: 100px 0; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .about h2 { font-size: clamp(36px, 5vw, 56px); line-height: 1.05; margin-bottom: 22px; }
+  .about h2 em { font-style: italic; color: var(--copper); }
+  .about p { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 19px; line-height: 1.7; color: var(--muted); margin-bottom: 16px; }
+  .about p:last-of-type { margin-bottom: 0; }
+  .about-img {
+    aspect-ratio: 4/5;
+    background: url('https://images.unsplash.com/photo-1568254183919-78a4f43a2877?w=900&q=80&auto=format&fit=crop') center/cover #d4a87a;
+    box-shadow: 30px 30px 0 -10px var(--copper);
+  }
+
+  /* CTA */
+  .cta { background: var(--copper); color: var(--cream); padding: 80px 0; text-align: center; }
+  .cta h2 { font-size: clamp(34px, 5vw, 56px); margin-bottom: 14px; color: var(--cream); }
+  .cta h2 em { font-style: italic; }
+  .cta p { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 19px; opacity: 0.95; margin-bottom: 30px; }
+  .btn-pill {
+    display: inline-block; padding: 14px 30px;
+    background: var(--cream); color: var(--copper);
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    border-radius: 999px;
+    transition: background .2s, color .2s;
+  }
+  .btn-pill:hover { background: var(--ink); color: var(--cream); }
+
+  /* VISIT */
+  .visit { padding: 80px 0; }
+  .visit-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+  .visit-block .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--copper); margin-bottom: 8px; font-weight: 700; }
+  .visit-block .val { font-family: 'Bodoni Moda', serif; font-size: 19px; line-height: 1.4; }
+
+  .footer { padding: 30px 0; border-top: 1px solid var(--rule); text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; color: var(--muted); text-transform: uppercase; }
+  .footer a { color: var(--copper); }
+
+  @media (max-width: 760px) {
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-img { box-shadow: 16px 16px 0 -6px var(--copper); }
+    .menu-item { grid-template-columns: 28px 1fr auto; gap: 14px; }
+    .menu-item h3 em { display: block; margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="logo-mark">Linden Bakery</div>
+      <div class="nav-meta">Est. 2014 · Open 7am</div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-head">
+        <span class="label">— Today's Bake</span>
+        <span class="date">Fri / 16 May 2026</span>
+      </div>
+      <h1>Bread,<br/>made <em>this morning.</em></h1>
+      <p class="hero-tag">A small neighborhood bakery. Sold out by 2pm. First-come, first-served.</p>
+    </div>
+  </section>
+
+  <section class="menu-block">
+    <div class="container">
+      <div class="menu-title">— On the counter, fresh out the oven</div>
+
+      <div class="menu-item">
+        <div class="num">01</div>
+        <div class="body">
+          <h3>Country sourdough <em>boule</em></h3>
+          <p>Long-fermented overnight. Crackling crust, open crumb.</p>
+        </div>
+        <div class="price">$9</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="num">02</div>
+        <div class="body">
+          <h3>Butter croissant</h3>
+          <p>72-hour cold ferment. Eighty-one layers of laminated dough.</p>
+        </div>
+        <div class="price">$4.50</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="num">03</div>
+        <div class="body">
+          <h3>Pain au chocolat</h3>
+          <p>Dark Valrhona batons. Best within the hour.</p>
+        </div>
+        <div class="price">$5</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="num">04</div>
+        <div class="body">
+          <h3>Cinnamon morning bun</h3>
+          <p>Brown butter, cardamom sugar. Twelve only.</p>
+        </div>
+        <div class="price">$5</div>
+      </div>
+
+      <div class="menu-item sold" style="position: relative;">
+        <div class="num">05</div>
+        <div class="body">
+          <h3>Sugar plum galette</h3>
+          <p>Stone-fruit, almond cream, free-form crust.</p>
+        </div>
+        <div class="price">$7</div>
+      </div>
+
+      <div class="menu-item">
+        <div class="num">06</div>
+        <div class="body">
+          <h3>Quiche of the day <em>— leek &amp; gruyère</em></h3>
+          <p>Whole egg, cultured cream, parker-house style crust.</p>
+        </div>
+        <div class="price">$9</div>
+      </div>
+
+      <div class="menu-foot">
+        <span>Restocks: never. Tomorrow we bake again.</span>
+        <span>Cash + card · No reservations</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="container about-grid">
+      <div>
+        <h2>One oven. <em>Two bakers.</em> A lot of flour.</h2>
+        <p>Linden is a two-person bakery on a quiet block. Our starter is twelve years old and named Margaret.</p>
+        <p>We mill our own flour, source butter from a farm an hour north, and bake in batches small enough to fit on one tray.</p>
+      </div>
+      <div class="about-img" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <h2>Save your <em>loaf.</em></h2>
+      <p>Reserve a country sourdough for pickup. Fridays only.</p>
+      <a href="#" onclick="event.preventDefault(); openModal('loafModal');" class="btn-pill">Reserve a loaf →</a>
+    </div>
+  </section>
+
+  <section class="visit">
+    <div class="container">
+      <div class="visit-inner">
+        <div class="visit-block">
+          <div class="label">Address</div>
+          <div class="val">218 Linden Lane<br/>Corner of Pine</div>
+        </div>
+        <div class="visit-block">
+          <div class="label">Hours</div>
+          <div class="val">Wed – Sun<br/>7am – 2pm (or sold out)</div>
+        </div>
+        <div class="visit-block">
+          <div class="label">Contact</div>
+          <div class="val">(555) 218-0140<br/>hi@lindenbakery.com</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 Linden Bakery — Site built by <a href="../index.html">ZYDE</a>
+    </div>
+  </footer>
+
+  <style>
+    .modal { position: fixed; inset: 0; z-index: 1000; display: none; }
+    .modal.open { display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .modal-backdrop { position: absolute; inset: 0; background: rgba(42, 24, 16, 0.6); backdrop-filter: blur(8px); }
+    .modal-card { position: relative; background: var(--cream); color: var(--ink); max-width: 460px; width: 100%; padding: 44px 38px; border-radius: 4px; max-height: 92vh; overflow-y: auto; box-shadow: 0 40px 100px -20px rgba(42, 24, 16, 0.45); border-top: 4px solid var(--copper); }
+    .modal-x { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; background: rgba(42, 24, 16, 0.08); border: 0; border-radius: 50%; font-size: 22px; cursor: pointer; color: var(--ink); display: flex; align-items: center; justify-content: center; }
+    .modal-x:hover { background: var(--copper); color: var(--cream); }
+    .modal-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px; color: var(--copper); }
+    .modal-title { font-family: 'Bodoni Moda', serif; font-size: 38px; line-height: 1.0; margin-bottom: 8px; color: var(--ink); font-weight: 700; letter-spacing: -0.02em; }
+    .modal-title em { font-style: italic; color: var(--copper); font-weight: 500; }
+    .modal-sub { font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 17px; color: var(--muted); margin-bottom: 28px; }
+    .modal-card form { display: flex; flex-direction: column; gap: 12px; }
+    .modal-card form label { display: flex; flex-direction: column; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    .modal-card form input, .modal-card form select { padding: 13px 14px; border: 1px solid var(--rule); font-family: inherit; font-size: 15px; border-radius: 2px; background: var(--blush); color: var(--ink); font-weight: 400; letter-spacing: 0; text-transform: none; }
+    .modal-card form input:focus, .modal-card form select:focus { outline: none; border-color: var(--copper); }
+    .modal-submit { margin-top: 6px; padding: 15px 24px; background: var(--copper); color: var(--cream); border: 0; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; }
+    .modal-submit:hover { background: var(--ink); }
+    .modal-success { text-align: center; padding: 16px 0; }
+    .modal-success .check { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: var(--copper); color: var(--cream); font-size: 32px; margin-bottom: 22px; }
+    .modal-success p { color: var(--muted); margin-top: 10px; font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 17px; line-height: 1.55; }
+    .modal-done-btn { margin-top: 24px; padding: 12px 22px; background: transparent; border: 1px solid var(--ink); border-radius: 999px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; color: var(--ink); }
+    .modal-done-btn:hover { background: var(--ink); color: var(--cream); }
+  </style>
+
+  <div class="modal" id="loafModal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <button class="modal-x" onclick="closeModal('loafModal')">×</button>
+      <div class="modal-body">
+        <div class="modal-eyebrow">— Loaf reservation</div>
+        <h3 class="modal-title">Save your <em>loaf.</em></h3>
+        <p class="modal-sub">We hold one country sourdough with your name on it. Pickup Fridays only.</p>
+        <form data-success="<h3 class='modal-title'>Loaf reserved, <em>{name}!</em></h3><p>One {loaf} held for {pickup}. We'll text {phone} the night before.</p>">
+          <label>Your name<input name="name" type="text" required placeholder="First and last"></label>
+          <label>Phone<input name="phone" type="tel" required placeholder="(555) 123-4567"></label>
+          <label>Which loaf?<select name="loaf" required>
+            <option>Country sourdough boule — $9</option>
+            <option>Country sourdough — half loaf — $5</option>
+            <option>Seeded sourdough (when available) — $10</option>
+          </select></label>
+          <label>Pickup Friday<select name="pickup" required>
+            <option>This Friday, May 22 · 7am – 2pm</option>
+            <option>Friday, May 29 · 7am – 2pm</option>
+            <option>Friday, Jun 5 · 7am – 2pm</option>
+            <option>Friday, Jun 12 · 7am – 2pm</option>
+          </select></label>
+          <button type="submit" class="modal-submit">Reserve →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeModal(id) {
+      const m = document.getElementById(id);
+      m.classList.remove('open'); document.body.style.overflow = '';
+      setTimeout(() => { if (m.dataset.original) m.querySelector('.modal-body').innerHTML = m.dataset.original; }, 300);
+    }
+    document.querySelectorAll('.modal').forEach(m => { m.dataset.original = m.querySelector('.modal-body').innerHTML; });
+    document.addEventListener('click', (e) => { if (e.target.classList.contains('modal-backdrop')) { const m = e.target.closest('.modal'); if (m) closeModal(m.id); } });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('.modal.open').forEach(m => closeModal(m.id)); });
+    document.addEventListener('submit', (e) => {
+      if (!e.target.matches('.modal form')) return;
+      e.preventDefault();
+      const form = e.target, modal = form.closest('.modal'), data = new FormData(form);
+      let html = form.dataset.success || '<h3>Done!</h3>';
+      for (const [k, v] of data.entries()) html = html.replace(new RegExp('\\{' + k + '\\}', 'g'), v || '');
+      modal.querySelector('.modal-body').innerHTML = `<div class="modal-success"><div class="check">✓</div>${html}<button class="modal-done-btn" onclick="closeModal('${modal.id}')">Close</button></div>`;
+    });
+  </script>
+</body>
+</html>

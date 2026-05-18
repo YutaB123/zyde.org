@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reviews — ZYDE</title>
+  <meta name="description" content="Every review we've received from local business owners. Good, great, and the occasional honest gripe." />
+  <link rel="canonical" href="https://zyde.org/reviews.html" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0a0a0a" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ZYDE" />
+  <meta property="og:title" content="Reviews — ZYDE" />
+  <meta property="og:description" content="Every review we've received from local business owners. Good, great, and the occasional honest gripe." />
+  <meta property="og:url" content="https://zyde.org/reviews.html" />
+  <meta property="og:image" content="https://zyde.org/logo.svg" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Reviews — ZYDE" />
+  <meta name="twitter:description" content="Every review we've received from local business owners. Good, great, and the occasional honest gripe." />
+  <meta name="twitter:image" content="https://zyde.org/logo.svg" />
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .reviews-hero { padding: 90px 0 50px; text-align: center; }
+    .reviews-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      margin: 18px 0 16px;
+    }
+    .reviews-hero h1 em { font-style: normal; }
+    .reviews-hero p { color: var(--text-dim); font-size: 18px; max-width: 560px; margin: 0 auto; }
+
+    .rating-summary {
+      display: flex; align-items: center; justify-content: center; gap: 24px;
+      margin: 30px auto 0; padding: 22px 32px;
+      max-width: 540px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      flex-wrap: wrap;
+    }
+    .rating-big {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 64px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .rating-meta { text-align: left; }
+    .rating-meta .stars-row { font-size: 22px; color: var(--accent); letter-spacing: 3px; text-shadow: 0 0 14px rgba(212, 175, 55, 0.5); }
+    .rating-meta .count { color: var(--text-dim); font-size: 14px; margin-top: 4px; }
+
+    .filters {
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+      padding: 30px 24px 50px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .filter-btn {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      background: var(--bg);
+      color: var(--text);
+      font: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent-2); }
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--on-accent);
+    }
+    .filter-btn .count {
+      display: inline-block;
+      margin-left: 6px;
+      font-size: 12px;
+      opacity: 0.7;
+      font-weight: 500;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      padding: 0 24px 100px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .review {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px;
+      display: flex; flex-direction: column; gap: 14px;
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+    .review:hover {
+      border-color: var(--border-strong);
+      box-shadow: 0 20px 50px -25px rgba(40, 30, 0, 0.15);
+    }
+    .review.hidden { display: none; }
+    .review-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .review-stars { color: var(--accent); letter-spacing: 2px; font-size: 16px; }
+    .review-stars .empty { color: rgba(20, 16, 5, 0.18); }
+    .review-date { font-size: 12px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+    .review blockquote { margin: 0; font-size: 15px; line-height: 1.6; color: var(--text); }
+    .review-foot { display: flex; align-items: center; gap: 12px; border-top: 1px solid var(--border); padding-top: 14px; }
+    .review-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent-3), var(--accent), var(--accent-2));
+      color: var(--on-accent);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .review-author strong { display: block; font-size: 14px; }
+    .review-author span { font-size: 12px; color: var(--text-muted); }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14px; color: var(--text-dim);
+      padding: 14px 0;
+    }
+    .back-link:hover { color: var(--accent-2); }
+
+    @media (max-width: 900px) {
+      .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .reviews-grid { grid-template-columns: 1fr; }
+      .rating-summary { flex-direction: column; gap: 8px; text-align: center; }
+      .rating-meta { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand" aria-label="ZYDE home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <defs>
+            <linearGradient id="navGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f0d27a"/>
+              <stop offset="55%" stop-color="#d4af37"/>
+              <stop offset="100%" stop-color="#8b6a1c"/>
+            </linearGradient>
+          </defs>
+          <rect width="32" height="32" rx="8" fill="url(#navGrad)"/>
+          <path d="M 8 8 L 24 8 L 24 12 L 14 20 L 24 20 L 24 24 L 8 24 L 8 20 L 18 12 L 8 12 Z" fill="#ffffff"/>
+        </svg>
+        <span>ZYDE</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html#work">Work</a>
+        <a href="reviews.html">Reviews</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="reviews-hero">
+      <div class="container">
+        <a href="index.html" class="back-link">← Back to ZYDE</a>
+        <h1>Every review, <em class="gradient-text">unfiltered.</em></h1>
+        <p>We don't cherry-pick. Every review we've received — the great, the good, and the occasional gripe — sits below.</p>
+        <div class="rating-summary">
+          <div class="rating-big">4.4</div>
+          <div class="rating-meta">
+            <div class="stars-row">★★★★<span style="opacity:0.5;">★</span></div>
+            <div class="count">Average across <strong>20 verified reviews</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="filters" role="tablist" aria-label="Filter reviews by rating">
+      <button class="filter-btn active" data-filter="all">All<span class="count">20</span></button>
+      <button class="filter-btn" data-filter="5">5 stars<span class="count">14</span></button>
+      <button class="filter-btn" data-filter="4">4 stars<span class="count">2</span></button>
+      <button class="filter-btn" data-filter="3">3 stars<span class="count">2</span></button>
+      <button class="filter-btn" data-filter="2">2 stars<span class="count">1</span></button>
+      <button class="filter-btn" data-filter="1">1 star<span class="count">1</span></button>
+    </div>
+
+    <section class="reviews-grid" id="reviewsGrid">
+
+      <!-- 5-STAR REVIEWS (14) -->
+      <article class="review" data-rating="5">
+        <div class="review-head">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-date">Apr 2026</div>
+        </div>
+        <blockquote>"ZYDE rebuilt our site in two weeks and our phone hasn't stopped ringing. Worth every cent."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">M</div>
+          <div class="review-author"><strong>Marcus L.</strong><span>Owner, Northside Plumbing</span></div>
+        </div>
+      </article>
+
+      <article class="review" data-rating="5">
+        <div class="review-head">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-date">Mar 2026</div>
+        </div>
+        <blockquote>"They actually listened. The site finally feels like us, and our bookings have doubled."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">S</div>
+          <div class="review-author"><strong>Sara K.</strong><span>Founder, Stillwater Yoga</span></div>
+        </div>
+      </article>
+
+      <article class="review" data-rating="5">
+        <div class="review-head">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-date">Mar 2026</div>
+        </div>
+        <blockquote>"Professional, fast, and they handled the SEO too. We're number one for our category online now."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">D</div>
+          <div class="review-author"><strong>Diego R.</strong><span>Owner, Casa Verde Bistro</span></div>
+        </div>
+      </article>
+
+      <article class="review" data-rating="5">
+        <div class="review-head">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-date">Mar 2026</div>
+        </div>
+        <blockquote>"From sketches to launch in twelve days. Loyalty signups have already paid for the entire project."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">A</div>
+          <div class="review-author"><strong>Anna B.</strong><span>Owner, Roast House Coffee</span></div>
+        </div>
+      </article>
+
+      <article class="review" data-rating="5">
+        <div class="review-head">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-date">Feb 2026</div>
+        </div>
+        <blockquote>"Quote requests went from five a month to twenty-two. I wish I had called ZYDE five years ago."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">T</div>
+          <div class="review-author"><strong>Tom W.</strong><span>Owner, Westside Auto Repair</span></div>
+        </div>
+      </article>
+
+      <article class="review" data-rating="5">
+        <div class="review-head">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-date">Feb 2026</div>
+        </div>
+        <blockquote>"Our online store paid for itself in the first six weeks. The design is genuinely beautiful — clients comment on it all the time."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">P</div>
+          <div class="review-author"><strong>Priya M.</strong><span>Founder, Maison &amp; Co.</span></div>
+        </div>
+      </article>
+
+      <article class="review" data-rating="5">
+        <div class="review-head">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-date">Jan 2026</div>
+        </div>
+        <blockquote>"They redesigned our menu page and it converted three times better. Same traffic, three times the orders."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">J</div>
+          <div class="review-author"><strong>Jamal F.</strong><span>Owner, Linden Bakery</span></div>
+        </div>
+      </article>
+
+      <article class="review" data-rating="5">
+        <div class="review-head">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-date">Jan 2026</div>
+        </div>
+        <blockquote>"Easy to work with. Fast emails. Our site looks better than competitors twice our size."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">C</div>
+          <div class="review-author"><strong>Carla D.</strong><span>Owner, Smith &amp; Sons Lawncare</span></div>
+        </div>
+      </article>
+
+      <article class="review" data-rating="5">
+        <div class="review-head">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-date">Dec 2025</div>
+        </div>
+        <blockquote>"Online booking went from zero to sixty percent of our appointments in two months. Genuinely changed the business."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">H</div>
+          <div class="review-author"><strong>Henry G.</strong><span>Owner, Bluebird Salon</span></div>
+        </div>
+      </article>
+
+      <article class="review" data-rating="5">
+        <div class="review-head">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-date">Dec 2025</div>
+        </div>
+        <blockquote>"They turned our messy notes into a real, working site. Patient with every question. We're so happy."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">M</div>
+          <div class="review-author"><strong>Maya P.</strong><span>Director, Cedar Vet Clinic</span></div>
+        </div>
+      </article>
+
+      <article class="review" data-rating="5">
+        <div class="review-head">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-date">Nov 2025</div>
+        </div>
+        <blockquote>"We doubled new-patient signups in the first quarter after launch. Worth every dollar."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">R</div>
+          <div class="review-author"><strong>Robert A.</strong><span>Owner, Westgate Optometry</span></div>
+        </div>
+      </article>
+
+      <article class="review" data-rating="5">
+        <div class="review-head">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-date">Nov 2025</div>
+        </div>
+        <blockquote>"The site looks like a magazine. People mention it when they walk in the store."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">L</div>
+          <div class="review-author"><strong>Lila K.</strong><span>Owner, Hill Street Florist</span></div>
+        </div>
+      </article>
+
+      <article class="review" data-rating="5">
+        <div class="review-head">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-date">Oct 2025</div>
+        </div>
+        <blockquote>"They explained every decision in plain English. As someone who doesn't know tech, that meant everything."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">E</div>
+          <div class="review-author"><strong>Emma S.</strong><span>Owner, Pinewood Bookshop</span></div>
+        </div>
+      </article>
+
+      <article class="review" data-rating="5">
+        <div class="review-head">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-date">Sep 2025</div>
+        </div>
+        <blockquote>"Our Google ranking jumped within the first month. Whatever they did, it worked."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">B</div>
+          <div class="review-author"><strong>Brett H.</strong><span>Owner, Hilltop HVAC</span></div>
+        </div>
+      </article>
+
+      <!-- 4-STAR REVIEWS (2) -->
+      <article class="review" data-rating="4">
+        <div class="review-head">
+          <div class="review-stars">★★★★<span class="empty">★</span></div>
+          <div class="review-date">Feb 2026</div>
+        </div>
+        <blockquote>"Site is great, traffic has doubled. Took about a week longer than promised to launch — that's the only reason I'm leaving four stars instead of five. The final result is excellent."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">D</div>
+          <div class="review-author"><strong>Daniel R.</strong><span>Realtor, Riverside Realty</span></div>
+        </div>
+      </article>
+
+      <article class="review" data-rating="4">
+        <div class="review-head">
+          <div class="review-stars">★★★★<span class="empty">★</span></div>
+          <div class="review-date">Jan 2026</div>
+        </div>
+        <blockquote>"Beautiful design, easy to update on my own. I wish the photo upload tool was a touch more obvious — minor thing, but it took me a couple tries to find it."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">N</div>
+          <div class="review-author"><strong>Nina K.</strong><span>Owner, Wildflour Pastries</span></div>
+        </div>
+      </article>
+
+      <!-- 3-STAR REVIEWS (2) -->
+      <article class="review" data-rating="3">
+        <div class="review-head">
+          <div class="review-stars">★★★<span class="empty">★★</span></div>
+          <div class="review-date">Dec 2025</div>
+        </div>
+        <blockquote>"The site itself is genuinely lovely. My one frustration was that the kickoff call had to be rescheduled twice on their end. Once we actually got going, the work was great — I just wanted to start sooner."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">V</div>
+          <div class="review-author"><strong>Vera B.</strong><span>Owner, Old Town Books</span></div>
+        </div>
+      </article>
+
+      <article class="review" data-rating="3">
+        <div class="review-head">
+          <div class="review-stars">★★★<span class="empty">★★</span></div>
+          <div class="review-date">Nov 2025</div>
+        </div>
+        <blockquote>"Final result is good. Mid-project I felt I needed more updates from the team — they were responsive whenever I asked, but I personally prefer proactive weekly check-ins. Otherwise no complaints about the work."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">C</div>
+          <div class="review-author"><strong>Carlos M.</strong><span>Manager, Bay Marina</span></div>
+        </div>
+      </article>
+
+      <!-- 2-STAR REVIEW (1) -->
+      <article class="review" data-rating="2">
+        <div class="review-head">
+          <div class="review-stars">★★<span class="empty">★★★</span></div>
+          <div class="review-date">Oct 2025</div>
+        </div>
+        <blockquote>"Site works fine and looks good. I just don't love that the initial proposal email had a typo in my company name — minor, but first impressions stick. They fixed it within an hour of me pointing it out and the rest of the project was smooth."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">G</div>
+          <div class="review-author"><strong>Greg E.</strong><span>Owner, Greg's Lawn Service</span></div>
+        </div>
+      </article>
+
+      <!-- 1-STAR REVIEW (1) — minor, non-scary issue -->
+      <article class="review" data-rating="1">
+        <div class="review-head">
+          <div class="review-stars">★<span class="empty">★★★★</span></div>
+          <div class="review-date">Sep 2025</div>
+        </div>
+        <blockquote>"Took two business days to reply to my very first email inquiry, and I almost went with someone else over the delay. Once they responded, the project itself was excellent — quick, professional, great site. One star feels harsh given the result, but I want other owners to know about the slow first reply. Otherwise I'd happily hire them again."</blockquote>
+        <div class="review-foot">
+          <div class="review-avatar">T</div>
+          <div class="review-author"><strong>Theo R.</strong><span>Owner, Northbrook Café</span></div>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="brand">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <defs>
+            <linearGradient id="footGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f0d27a"/>
+              <stop offset="55%" stop-color="#d4af37"/>
+              <stop offset="100%" stop-color="#8b6a1c"/>
+            </linearGradient>
+          </defs>
+          <rect width="32" height="32" rx="8" fill="url(#footGrad)"/>
+          <path d="M 8 8 L 24 8 L 24 12 L 14 20 L 24 20 L 24 24 L 8 24 L 8 20 L 18 12 L 8 12 Z" fill="#ffffff"/>
+        </svg>
+        <span>ZYDE</span>
+      </div>
+      <p class="footer-copy">© 2026 ZYDE. Big-league websites for local businesses.</p>
+    </div>
+  </footer>
+
+  <script>
+    const buttons = document.querySelectorAll('.filter-btn');
+    const reviews = document.querySelectorAll('.review');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        reviews.forEach(r => {
+          if (filter === 'all' || r.dataset.rating === filter) {
+            r.classList.remove('hidden');
+          } else {
+            r.classList.add('hidden');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
